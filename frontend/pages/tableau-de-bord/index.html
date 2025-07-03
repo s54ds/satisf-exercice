@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord - Enquête de Satisfaction</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../styles/global.css">
+    <link rel="stylesheet" href="tableau-de-bord.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js depuis cdnjs.cloudflare.com (compatible CSP) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+
+</head>
+<body>
+    <!-- Navbar Component -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <!-- Logo et titre -->
+            <div class="navbar-brand">
+                <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="brand-info">
+                    <i class="fas fa-hospital brand-icon"></i>
+                    <span class="brand-text">Administration</span>
+                </div>
+            </div>
+
+            <!-- Actions navbar -->
+            <div class="navbar-actions">
+                <!-- Notifications -->
+                <div class="navbar-item dropdown" id="notificationsDropdown">
+                    <button class="navbar-btn" aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge" id="notificationBadge">3</span>
+                    </button>
+                    <div class="dropdown-menu" id="notificationsMenu">
+                        <div class="dropdown-header">
+                            <h3>Notifications</h3>
+                            <button class="mark-all-read" id="markAllRead">Tout marquer lu</button>
+                        </div>
+                        <div class="dropdown-content">
+                            <div class="notification-item unread">
+                                <i class="fas fa-plus-circle notification-icon success"></i>
+                                <div class="notification-content">
+                                    <p>Nouvelle enquête reçue</p>
+                                    <small>Il y a 5 minutes</small>
+                                </div>
+                            </div>
+                            <div class="notification-item unread">
+                                <i class="fas fa-chart-line notification-icon info"></i>
+                                <div class="notification-content">
+                                    <p>Rapport mensuel disponible</p>
+                                    <small>Il y a 1 heure</small>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <i class="fas fa-user notification-icon warning"></i>
+                                <div class="notification-content">
+                                    <p>Nouvelle connexion admin</p>
+                                    <small>Il y a 2 heures</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-footer">
+                            <a href="#" class="view-all">Voir toutes les notifications</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profil utilisateur -->
+                <div class="navbar-item dropdown" id="userDropdown">
+                    <button class="navbar-btn user-btn" aria-label="Menu utilisateur">
+                        <div class="user-avatar">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="user-info">
+                            <span class="user-name" id="userName">Admin</span>
+                            <span class="user-role">Administrateur</span>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu" id="userMenu">
+                        <div class="dropdown-content">
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                <span>Mon profil</span>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                <span>Paramètres</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Se déconnecter</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar simplifiée -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+            <!-- Menu principal -->
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3 class="nav-title">Principal</h3>
+                    <ul class="nav-list">
+                        <li class="nav-item active">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-tachometer-alt nav-icon"></i>
+                                <span class="nav-text">Tableau de bord</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-title">Configuration</h3>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-users nav-icon"></i>
+                                <span class="nav-text">Utilisateurs</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Footer vide -->
+            <div class="sidebar-footer">
+                <!-- Contenu supprimé volontairement -->
+            </div>
+        </div>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="main-content" id="mainContent">
+        <div class="dashboard-container">
+            <!-- En-tête -->
+            <div class="dashboard-header">
+                <div class="header-content">
+                    <h1 class="dashboard-title">Tableau de Bord</h1>
+                    <p class="dashboard-subtitle">Vue d'ensemble des enquêtes de satisfaction</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="refreshBtn">
+                        <i class="fas fa-sync-alt"></i>
+                        Actualiser
+                    </button>
+                </div>
+            </div>
+
+            <!-- Statistiques -->
+            <div class="stats-grid">
+                <!-- 1. Total Enquêtes -->
+                <div class="stat-card">
+                    <div class="stat-card-icon stat-primary">
+                        <i class="fas fa-poll"></i>
+                    </div>
+                    <div class="stat-card-content">
+                        <h3 class="stat-value" id="totalEnquetes">-</h3>
+                        <p class="stat-label">Total Enquêtes</p>
+                        <div class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span id="tendanceEnquetes">+12%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Taux Satisfaction -->
+                <div class="stat-card">
+                    <div class="stat-card-icon stat-success">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <div class="stat-card-content">
+                        <h3 class="stat-value" id="tauxSatisfaction">-</h3>
+                        <p class="stat-label">Taux Satisfaction</p>
+                        <div class="stat-trend positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span id="tendanceSatisfaction">+5%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Taux Insatisfaction -->
+                <div class="stat-card">
+                    <div class="stat-card-icon stat-danger">
+                        <i class="fas fa-frown"></i>
+                    </div>
+                    <div class="stat-card-content">
+                        <h3 class="stat-value" id="tauxInsatisfaction">-</h3>
+                        <p class="stat-label">Taux Insatisfaction</p>
+                        <div class="stat-trend negative">
+                            <i class="fas fa-arrow-down"></i>
+                            <span id="tendanceInsatisfaction">-3%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graphiques -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>Enquêtes par Mois</h3>
+                    <div class="chart-container">
+                        <canvas id="chartEnquetesMois"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>Satisfaction vs Insatisfaction</h3>
+                    <div class="chart-container">
+                        <canvas id="chartSatisfaction"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section Tableau des Enquêtes avec le bouton Export déplacé -->
+            <div class="enquetes-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-list-alt section-title-icon"></i>
+                        Enquêtes
+                    </h2>
+                    <div class="table-actions">
+                        <!-- Barre de recherche -->
+                        <input type="text" 
+                               id="searchInput" 
+                               class="search-box" 
+                               placeholder="Rechercher par nom, téléphone, email..."
+                               aria-label="Rechercher dans les enquêtes">
+                        
+                        <!-- Filtre par statut -->
+                        <select id="filterStatus" 
+                                class="filter-select" 
+                                title="Filtrer par statut de satisfaction"
+                                aria-label="Filtrer par statut de satisfaction">
+                            <option value="">Tous les statuts</option>
+                            <option value="Satisfait">Satisfaits</option>
+                            <option value="Mécontent">Mécontents</option>
+                        </select>
+                        
+                        <!-- Filtre par raison -->
+                        <select id="filterRaison" 
+                                class="filter-select" 
+                                title="Filtrer par raison de présence"
+                                aria-label="Filtrer par raison de présence">
+                            <option value="">Toutes les raisons</option>
+                            <!-- Les options seront ajoutées dynamiquement -->
+                        </select>
+                        
+                        <!-- Bouton Export déplacé ici -->
+                        <button class="btn btn-primary" id="exportBtn">
+                            <i class="fas fa-download"></i>
+                            Exporter
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-responsive">
+                        <table class="enquetes-table" id="enquetesTable" role="table" aria-label="Liste des enquêtes de satisfaction">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Date/Heure</th>
+                                    <th scope="col">Visiteur</th>
+                                    <th scope="col">Contact</th>
+                                    <th scope="col">Raison</th>
+                                    <th scope="col">Service</th>
+                                    <th scope="col">Satisfaction</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="enquetesTableBody">
+                                <!-- Les données seront insérées ici par JavaScript -->
+                                 <tr class="loading-row">
+                                    <td colspan="7" class="loading-cell">
+                                        <i class="fas fa-spinner fa-spin loading-icon"></i>
+                                        <p class="loading-text">Chargement des enquêtes...</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination" id="paginationControls" role="navigation" aria-label="Navigation de pagination">
+                        <div class="pagination-info" id="paginationInfo">
+                            Chargement...
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="page-btn" 
+                                    id="prevBtn" 
+                                    onclick="changerPage(-1)" 
+                                    disabled
+                                    aria-label="Page précédente">
+                                <i class="fas fa-chevron-left"></i> Précédent
+                            </button>
+                            <span id="pageNumbers" role="group" aria-label="Numéros de pages"></span>
+                            <button class="page-btn" 
+                                    id="nextBtn" 
+                                    onclick="changerPage(1)" 
+                                    disabled
+                                    aria-label="Page suivante">
+                                Suivant <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden" role="status" aria-label="Chargement en cours">
+        <div class="spinner"></div>
+        <p>Chargement...</p>
+    </div>
+
+    <!-- Configuration API CORRIGÉE -->
+    <script>
+        // Configuration de l'API - CORRIGÉE pour pointer vers le bon serveur
+        window.API_CONFIG = {
+            BASE_URL: 'http://localhost:5000/api', // Port corrigé vers 5000
+            ENDPOINTS: {
+                DASHBOARD_STATS: '/dashboard/stats',
+                AUTH_CHECK: '/auth/verify',
+                LOGOUT: '/auth/logout'
+            }
+        };
+    </script>
+
+    <!-- Scripts -->
+    <script src="../../scripts/utils.js"></script>
+    <script src="../../scripts/api.js"></script>
+    <script src="tableau-de-bord.js"></script>
+</body>
+</html>

@@ -1,0 +1,513 @@
+/* ========================================
+   STYLES FORMULAIRE D'ENQUÊTE
+   ======================================== */
+
+/* Variables spécifiques */
+:root {
+    --form-max-width: 800px;
+    --step-transition: 0.3s ease;
+}
+
+/* Layout principal */
+.main-content {
+    min-height: calc(100vh - 80px);
+    padding: 2rem 0;
+    background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+}
+
+.container {
+    max-width: var(--form-max-width);
+}
+
+/* Header du formulaire */
+.form-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.form-header h1 {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.form-header p {
+    font-size: var(--text-lg);
+    color: var(--gray-600);
+    margin-bottom: 2rem;
+}
+
+/* Barre de progression */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--gray-200);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    border-radius: var(--radius-full);
+    transition: width 0.3s ease;
+    width: 25%;
+}
+
+.progress-text {
+    font-size: var(--text-sm);
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+/* Formulaire principal */
+.enquete-form {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Étapes du formulaire */
+.form-step {
+    display: none;
+    padding: 3rem;
+    min-height: 500px;
+}
+
+.form-step.active {
+    display: block;
+    animation: slideIn var(--step-transition);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* En-tête des étapes */
+.step-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--gray-100);
+}
+
+.step-header h2 {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.step-header h2 i {
+    color: var(--primary-color);
+}
+
+.step-header p {
+    font-size: var(--text-base);
+    color: var(--gray-600);
+}
+
+/* Grille du formulaire */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+/* Groupes de formulaire */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--gray-700);
+    font-size: var(--text-sm);
+}
+
+.form-label.required::after {
+    content: ' *';
+    color: var(--error-color);
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--gray-300);
+    border-radius: var(--radius);
+    font-size: var(--text-base);
+    transition: all var(--transition-fast);
+    background: var(--white);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
+}
+
+.form-input:invalid:not(:focus) {
+    border-color: var(--error-color);
+}
+
+.form-input.error {
+    border-color: var(--error-color);
+    background: rgb(239 68 68 / 0.05);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+}
+
+/* Messages d'erreur */
+.error-message {
+    margin-top: 0.25rem;
+    font-size: var(--text-xs);
+    color: var(--error-color);
+    font-weight: 500;
+    min-height: 1rem;
+}
+
+/* Compteur de caractères */
+.char-counter {
+    text-align: right;
+    margin-top: 0.25rem;
+    font-size: var(--text-xs);
+    color: var(--gray-500);
+}
+
+/* Section satisfaction */
+.satisfaction-section {
+    margin: 2rem 0;
+}
+
+.satisfaction-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.satisfaction-option {
+    cursor: pointer;
+}
+
+.satisfaction-option input {
+    display: none;
+}
+
+.satisfaction-card {
+    padding: 2rem;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    transition: all var(--transition-fast);
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.satisfaction-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    transition: left 0.5s ease;
+}
+
+.satisfaction-card:hover::before {
+    left: 100%;
+}
+
+.satisfaction-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.satisfaction-card i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.satisfaction-card span {
+    display: block;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.satisfaction-card p {
+    font-size: var(--text-sm);
+    color: var(--gray-600);
+}
+
+/* États des cartes de satisfaction */
+.satisfaction-card.satisfait i {
+    color: var(--success-color);
+}
+
+.satisfaction-card.mecontent i {
+    color: var(--warning-color);
+}
+
+.satisfaction-option input:checked + .satisfaction-card {
+    border-color: var(--primary-color);
+    background: rgb(37 99 235 / 0.05);
+    transform: scale(1.02);
+}
+
+.satisfaction-option input:checked + .satisfaction-card.satisfait {
+    border-color: var(--success-color);
+    background: rgb(5 150 105 / 0.05);
+}
+
+.satisfaction-option input:checked + .satisfaction-card.mecontent {
+    border-color: var(--warning-color);
+    background: rgb(217 119 6 / 0.05);
+}
+
+/* Actions du formulaire */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 2px solid var(--gray-100);
+    gap: 1rem;
+}
+
+.form-actions .btn {
+    min-width: 120px;
+}
+
+/* Message de confirmation */
+.confirmation-message {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    padding: 4rem 3rem;
+    text-align: center;
+    border: 2px solid var(--success-color);
+}
+
+.confirmation-content i {
+    font-size: 4rem;
+    color: var(--success-color);
+    margin-bottom: 1.5rem;
+}
+
+.confirmation-content h2 {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.confirmation-content p {
+    font-size: var(--text-lg);
+    color: var(--gray-600);
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.confirmation-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Loading overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+     -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+.loading-overlay .spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--gray-200);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+.loading-overlay p {
+    font-size: var(--text-lg);
+    color: var(--gray-700);
+    font-weight: 500;
+}
+
+/* États cachés */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 1rem 0;
+    }
+
+    .form-header {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+    }
+
+    .form-header h1 {
+        font-size: var(--text-2xl);
+    }
+
+    .form-step {
+        padding: 2rem 1.5rem;
+        min-height: 400px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .satisfaction-options {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .satisfaction-card {
+        padding: 1.5rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+
+    .confirmation-actions {
+        flex-direction: column;
+    }
+
+    .confirmation-actions .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 0.5rem;
+    }
+
+    .form-header {
+        padding: 1rem;
+    }
+
+    .form-step {
+        padding: 1.5rem 1rem;
+    }
+
+    .step-header {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .step-header h2 {
+        font-size: var(--text-xl);
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* Animations pour les transitions */
+.form-step.slide-out-left {
+    animation: slideOutLeft var(--step-transition);
+}
+
+.form-step.slide-out-right {
+    animation: slideOutRight var(--step-transition);
+}
+
+@keyframes slideOutLeft {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+}
+
+/* Focus visible pour l'accessibilité */
+.satisfaction-option:focus-within .satisfaction-card {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Amélioration des états de survol */
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}

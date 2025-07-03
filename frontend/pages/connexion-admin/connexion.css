@@ -1,0 +1,411 @@
+/* ========================================
+   STYLES PAGE DE CONNEXION ADMIN - VERSION COMPACTE
+   ======================================== */
+
+/* Variables spécifiques */
+:root {
+    --login-max-width: 480px;
+    --login-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Layout principal */
+.main-content {
+    min-height: calc(100vh - 80px);
+    background: var(--login-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--login-max-width);
+}
+
+/* Container de connexion */
+.login-container {
+    width: 100%;
+    padding: 0 1rem;
+}
+
+.login-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* En-tête simplifié */
+.login-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: var(--white);
+    text-align: center;
+    padding: 1.5rem 2rem 1rem;
+    position: relative;
+}
+
+.login-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    opacity: 0.9;
+}
+
+.login-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.login-header p {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* Formulaire */
+.login-form {
+    padding: 1.5rem 2rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--gray-700);
+    font-size: 0.875rem;
+}
+
+.form-label i {
+    color: var(--primary-color);
+    width: 14px;
+    font-size: 0.875rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--gray-300);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    background: var(--white);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    transform: translateY(-1px);
+}
+
+.form-input.error {
+    border-color: var(--error-color);
+    background: rgba(239, 68, 68, 0.05);
+}
+
+/* Container de mot de passe */
+.password-container {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--gray-500);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+}
+
+.password-toggle:hover {
+    color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.1);
+}
+
+/* Messages d'erreur */
+.error-message {
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    color: var(--error-color);
+    font-weight: 500;
+    min-height: 1rem;
+}
+
+#general-error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid var(--error-color);
+    border-radius: 6px;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    display: none;
+}
+
+#general-error.show {
+    display: block;
+}
+
+/* Bouton principal */
+.btn-full {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    margin: 1rem 0 0.75rem;
+}
+
+.btn-full:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+}
+
+/* Footer du formulaire */
+.form-footer {
+    border-top: 1px solid var(--gray-200);
+    padding: 0.75rem 0 0;
+    margin-top: 0.75rem;
+}
+
+.quick-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.quick-btn {
+    background: var(--gray-100);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    color: var(--gray-700);
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.quick-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-1px);
+}
+
+.test-credentials {
+    text-align: center;
+    padding: 0.5rem;
+    background: var(--gray-50);
+    border-radius: 6px;
+    border: 1px dashed var(--gray-300);
+}
+
+.test-credentials small {
+    color: var(--gray-600);
+    font-size: 0.75rem;
+}
+
+/* Loading overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+.loading-overlay .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--gray-200);
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+.loading-overlay p {
+    font-size: 0.9rem;
+    color: var(--gray-700);
+    font-weight: 500;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* États cachés */
+.hidden {
+    display: none !important;
+}
+
+/* États de chargement des boutons */
+.btn.loading {
+    opacity: 0.8;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 1rem 0;
+    }
+
+    .login-header {
+        padding: 1.25rem 1.5rem 0.75rem;
+    }
+
+    .login-form {
+        padding: 1.25rem 1.5rem;
+    }
+
+    .form-footer {
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --login-max-width: 100%;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+
+    .login-container {
+        padding: 0 0.5rem;
+    }
+
+    .login-header {
+        padding: 1rem 1rem 0.5rem;
+    }
+
+    .login-header h1 {
+        font-size: 1.25rem;
+    }
+
+    .login-form {
+        padding: 1rem;
+    }
+
+    .quick-actions {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .quick-btn {
+        justify-content: center;
+    }
+}
+
+/* Animations pour l'accessibilité */
+@media (prefers-reduced-motion: reduce) {
+    .login-card {
+        animation: none;
+    }
+    
+    .form-input:focus {
+        transform: none;
+    }
+    
+    .btn-full:hover {
+        transform: none;
+    }
+    
+    .quick-btn:hover {
+        transform: none;
+    }
+}
+
+/* Support pour les navigateurs sans backdrop-filter */
+@supports not (backdrop-filter: blur(5px)) {
+    .loading-overlay {
+        background: rgba(255, 255, 255, 0.98);
+    }
+}
+
+/* Styles pour l'impression */
+@media print {
+    .login-card {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+    
+    .login-header {
+        background: #f0f0f0 !important;
+        color: #000 !important;
+    }
+    
+    .loading-overlay {
+        display: none !important;
+    }
+}
+
+/* Support pour les écrans très petits */
+@media (max-width: 320px) {
+    .login-header {
+        padding: 1rem 0.75rem 0.75rem;
+    }
+    
+    .login-form {
+        padding: 0.75rem;
+    }
+    
+    .form-input {
+        padding: 0.625rem 0.75rem;
+        font-size: 0.875rem;
+    }
+}

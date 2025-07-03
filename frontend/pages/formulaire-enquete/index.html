@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquête de Satisfaction - Formulaire</title>
+    <meta name="description" content="Partagez votre expérience et aidez-nous à améliorer nos services">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../styles/global.css">
+    <link rel="stylesheet" href="formulaire.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-hospital" aria-hidden="true"></i>
+                    <h1>Enquête de Satisfaction</h1>
+                </div>
+                <nav class="main-nav">
+                    <a href="../../index.html" class="nav-link">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i> Retour à l'accueil
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section Principale -->
+    <main class="main-content">
+        <div class="container">
+            <!-- En-tête du formulaire -->
+            <div class="form-header">
+                <h1>Votre avis nous intéresse</h1>
+                <p>Prenez quelques minutes pour partager votre expérience et nous aider à améliorer nos services.</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text">Étape <span id="currentStep">1</span> sur <span id="totalSteps">4</span></p>
+            </div>
+
+            <!-- Formulaire -->
+            <form id="enqueteForm" class="enquete-form" novalidate>
+                <!-- Étape 1: Informations de visite -->
+                <div class="form-step active" data-step="1">
+                    <div class="step-header">
+                        <h2><i class="fas fa-calendar-alt" aria-hidden="true"></i> Informations de votre visite</h2>
+                        <p>Indiquez-nous les détails de votre visite</p>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="dateVisite" class="form-label required">Date de votre visite</label>
+                            <input type="date" id="dateVisite" name="dateVisite" class="form-input" required>
+                            <div class="error-message" id="dateVisite-error"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="heureVisite" class="form-label required">Heure de votre visite</label>
+                            <input type="time" id="heureVisite" name="heureVisite" class="form-input" required>
+                            <div class="error-message" id="heureVisite-error"></div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="raisonPresence" class="form-label required">Raison de votre présence</label>
+                            <select id="raisonPresence" name="raisonPresence" class="form-input form-select" required>
+                                <option value="">Sélectionnez une raison</option>
+                                <option value="Information">Information</option>
+                                <option value="Prise de sang (Bilan)">Prise de sang (Bilan)</option>
+                                <option value="Retrait de résultat">Retrait de résultat</option>
+                            </select>
+                            <div class="error-message" id="raisonPresence-error"></div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="serviceConcerne" class="form-label required">Service concerné</label>
+                            <select id="serviceConcerne" name="serviceConcerne" class="form-input form-select" required>
+                                <option value="">Chargement des services...</option>
+                            </select>
+                            <div class="error-message" id="serviceConcerne-error"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-primary" data-action="next">
+                            Suivant <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Étape 2: Coordonnées -->
+                <div class="form-step" data-step="2">
+                    <div class="step-header">
+                        <h2><i class="fas fa-user" aria-hidden="true"></i> Vos coordonnées</h2>
+                        <p>Ces informations nous permettront de vous recontacter si nécessaire</p>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="nom" class="form-label required">Nom</label>
+                            <input type="text" id="nom" name="nom" class="form-input" required 
+                                   placeholder="Votre nom" maxlength="100">
+                            <div class="error-message" id="nom-error"></div>
+                        </div>
+
+                        <!-- MODIFICATION: Prénom maintenant obligatoire -->
+                        <div class="form-group">
+                            <label for="prenom" class="form-label required">Prénom</label>
+                            <input type="text" id="prenom" name="prenom" class="form-input" required
+                                   placeholder="Votre prénom" maxlength="100">
+                            <div class="error-message" id="prenom-error"></div>
+                        </div>
+
+                        <!-- MODIFICATION: Placeholder adapté pour la Côte d'Ivoire -->
+                        <div class="form-group">
+                            <label for="telephone" class="form-label required">Téléphone</label>
+                            <input type="tel" id="telephone" name="telephone" class="form-input" required 
+                                   placeholder="Ex: +225 01234567 ou 01234567" maxlength="20">
+                            <div class="error-message" id="telephone-error"></div>
+                        </div>
+
+                        <!-- MODIFICATION: Email maintenant obligatoire -->
+                        <div class="form-group">
+                            <label for="email" class="form-label required">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" required
+                                   placeholder="nom@domaine.com" maxlength="150">
+                            <div class="error-message" id="email-error"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" data-action="prev">
+                            <i class="fas fa-arrow-left" aria-hidden="true"></i> Précédent
+                        </button>
+                        <button type="button" class="btn btn-primary" data-action="next">
+                            Suivant <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Étape 3: Évaluation -->
+                <div class="form-step" data-step="3">
+                    <div class="step-header">
+                        <h2><i class="fas fa-star" aria-hidden="true"></i> Votre évaluation</h2>
+                        <p>Dites-nous ce que vous avez pensé de notre service</p>
+                    </div>
+
+                    <div class="satisfaction-section">
+                        <div class="form-group">
+                            <label class="form-label required">Quel est votre niveau de satisfaction ?</label>
+                            <div class="satisfaction-options">
+                                <label class="satisfaction-option">
+                                    <input type="radio" name="satisfaction" value="Satisfait" required>
+                                    <div class="satisfaction-card satisfait">
+                                        <i class="fas fa-smile" aria-hidden="true"></i>
+                                        <span>Satisfait</span>
+                                        <p>Votre expérience a été positive</p>
+                                    </div>
+                                </label>
+                                <label class="satisfaction-option">
+                                    <input type="radio" name="satisfaction" value="Mécontent" required>
+                                    <div class="satisfaction-card mecontent">
+                                        <i class="fas fa-frown" aria-hidden="true"></i>
+                                        <span>Mécontent</span>
+                                        <p>Votre expérience peut être améliorée</p>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="error-message" id="satisfaction-error"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" data-action="prev">
+                            <i class="fas fa-arrow-left" aria-hidden="true"></i> Précédent
+                        </button>
+                        <button type="button" class="btn btn-primary" data-action="next">
+                            Suivant <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Étape 4: Commentaires -->
+                <div class="form-step" data-step="4">
+                    <div class="step-header">
+                        <h2><i class="fas fa-comment" aria-hidden="true"></i> Vos commentaires</h2>
+                        <p>Partagez vos observations et suggestions pour nous aider à nous améliorer</p>
+                    </div>
+
+                    <!-- MODIFICATION: Commentaires maintenant obligatoires -->
+                    <div class="form-group">
+                        <label for="commentaires" class="form-label required">Commentaires sur votre expérience</label>
+                        <textarea id="commentaires" name="commentaires" class="form-input form-textarea" required
+                                  rows="4" maxlength="1000" 
+                                  placeholder="Décrivez votre expérience, ce qui vous a plu ou déplu... (minimum 10 caractères)"></textarea>
+                        <div class="char-counter">
+                            <span id="commentaires-count">0</span>/1000 caractères
+                        </div>
+                        <div class="error-message" id="commentaires-error"></div>
+                    </div>
+
+                    <!-- MODIFICATION: Recommandations maintenant obligatoires -->
+                    <div class="form-group">
+                        <label for="recommandations" class="form-label required">Suggestions d'amélioration</label>
+                        <textarea id="recommandations" name="recommandations" class="form-input form-textarea" required
+                                  rows="4" maxlength="1000" 
+                                  placeholder="Quelles améliorations suggérez-vous ? (minimum 10 caractères)"></textarea>
+                        <div class="char-counter">
+                            <span id="recommandations-count">0</span>/1000 caractères
+                        </div>
+                        <div class="error-message" id="recommandations-error"></div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" data-action="prev">
+                            <i class="fas fa-arrow-left" aria-hidden="true"></i> Précédent
+                        </button>
+                        <button type="submit" class="btn btn-success" id="submitBtn">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i> Envoyer mon enquête
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Message de confirmation -->
+            <div id="confirmationMessage" class="confirmation-message hidden">
+                <div class="confirmation-content">
+                    <i class="fas fa-check-circle" aria-hidden="true"></i>
+                    <h2>Merci pour votre participation !</h2>
+                    <p>Votre enquête de satisfaction a été envoyée avec succès. Vos commentaires nous aideront à améliorer nos services.</p>
+                    <div class="confirmation-actions">
+                        <a href="../../index.html" class="btn btn-primary">
+                            <i class="fas fa-home" aria-hidden="true"></i> Retour à l'accueil
+                        </a>
+                        <button type="button" class="btn btn-secondary" data-action="reset">
+                            <i class="fas fa-plus" aria-hidden="true"></i> Nouvelle enquête
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p>Envoi de votre enquête en cours...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../scripts/api.js"></script>
+    <script src="../../scripts/utils.js"></script>
+    <script src="formulaire.js"></script>
+</body>
+</html>

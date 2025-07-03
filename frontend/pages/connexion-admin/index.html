@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion Administration - Enquête de Satisfaction</title>
+    <meta name="description" content="Connexion à l'interface d'administration du système d'enquête de satisfaction">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../styles/global.css">
+    <link rel="stylesheet" href="connexion.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-hospital" aria-hidden="true"></i>
+                    <h1>Administration</h1>
+                </div>
+                <nav class="main-nav">
+                    <a href="../accueil/index.html" class="nav-link">
+                        <i class="fas fa-arrow-left" aria-hidden="true"></i> Retour à l'accueil
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section Principale -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Formulaire de connexion -->
+            <div class="login-container">
+                <div class="login-card">
+                    <!-- En-tête simplifié -->
+                    <div class="login-header">
+                        <i class="fas fa-shield-alt login-icon" aria-hidden="true"></i>
+                        <h1>Connexion</h1>
+                        <p>Accès administrateur</p>
+                    </div>
+
+                    <!-- Formulaire -->
+                    <form id="loginForm" class="login-form" novalidate>
+                        <div class="form-group">
+                            <label for="username" class="form-label">
+                                <i class="fas fa-user" aria-hidden="true"></i>
+                                Nom d'utilisateur
+                            </label>
+                            <input 
+                                type="text" 
+                                id="username" 
+                                name="username" 
+                                class="form-input" 
+                                required 
+                                autocomplete="username"
+                                placeholder="Votre non d'utilisateur"
+                                maxlength="50"
+                            >
+                            <div class="error-message" id="username-error"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="form-label">
+                                <i class="fas fa-lock" aria-hidden="true"></i>
+                                Mot de passe
+                            </label>
+                            <div class="password-container">
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    class="form-input" 
+                                    required 
+                                    autocomplete="current-password"
+                                    placeholder="Votre mot de passe"
+                                    maxlength="100"
+                                >
+                                <button type="button" class="password-toggle" id="passwordToggle" aria-label="Afficher/Masquer le mot de passe">
+                                    <i class="fas fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <div class="error-message" id="password-error"></div>
+                        </div>
+
+                        <!-- Message d'erreur général -->
+                        <div class="error-message" id="general-error"></div>
+
+                        <!-- Bouton de connexion -->
+                        <button type="submit" class="btn btn-primary btn-full" id="loginBtn">
+                            <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+                            Se connecter
+                        </button>
+
+                        <!-- Options rapides -->
+                        <div class="form-footer">
+                            <div class="quick-actions">
+                                <button type="button" class="quick-btn" id="forgotPasswordLink" title="Mot de passe oublié">
+                                    <i class="fas fa-question-circle" aria-hidden="true"></i>
+                                    Aide
+                                </button>
+                            </div>
+                            <div class="test-credentials" id="testCredentials">
+                                <small><strong>Test:</strong> zadjehi / Gbodolou28@</small>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p>Connexion...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../scripts/api.js"></script>
+    <script src="../../scripts/utils.js"></script>
+    <script src="connexion.js"></script>
+</body>
+</html>
