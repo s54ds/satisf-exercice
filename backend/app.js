@@ -76,7 +76,7 @@ const corsOptions = {
     exposedHeaders: ['x-session-id']        // Exposer l'ID de session
 };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 // ========================================
 // LIMITATION DU TAUX DE REQUÊTES
